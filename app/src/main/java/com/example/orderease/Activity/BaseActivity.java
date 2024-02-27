@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class BaseActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase database;
-    public String TAG="kubik";
+    public String TAG="Text for toast";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

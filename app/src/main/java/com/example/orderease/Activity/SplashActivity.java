@@ -38,5 +38,6 @@ public class SplashActivity extends AppCompatActivity {
             }
             finish();
         }, 2000);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.gray));
     }
 }

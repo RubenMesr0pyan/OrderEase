@@ -13,6 +13,7 @@ import com.example.orderease.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import android.widget.TextView;
 
 public class LoginActivity extends BaseActivity {
     ActivityLoginBinding binding;
@@ -23,6 +24,34 @@ public class LoginActivity extends BaseActivity {
         setContentView(binding.getRoot());
 
         setVariable();
+
+
+
+
+        setContentView(R.layout.activity_login);
+
+        TextView textView = findViewById(R.id.textView7);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView textView2 = findViewById(R.id.textView8);
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent2);
+            }
+        });
+
+
+
+
+
 
     }
 

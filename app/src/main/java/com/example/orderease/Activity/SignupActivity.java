@@ -14,7 +14,7 @@ import com.example.orderease.databinding.ActivitySignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-
+import android.widget.TextView;
 public class SignupActivity extends BaseActivity {
     ActivitySignupBinding binding;
 
@@ -25,6 +25,23 @@ public class SignupActivity extends BaseActivity {
         setContentView(binding.getRoot());
 
         setVariable();
+
+
+        setContentView(R.layout.activity_signup);
+
+        TextView textView5 = findViewById(R.id.textView5);
+        textView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     private void setVariable() {
@@ -39,7 +56,7 @@ public class SignupActivity extends BaseActivity {
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this, task -> {
                 if (task.isSuccessful()){
                     Log.i(TAG,"onComplete: ");
-                    startActivity(new Intent(SignupActivity.this,MainActivity.class));
+                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
                 }else {
                   Log.i(TAG,"failure: "+ task.getException());
                   Toast.makeText(SignupActivity.this,"Authentication failed",Toast.LENGTH_SHORT).show();
