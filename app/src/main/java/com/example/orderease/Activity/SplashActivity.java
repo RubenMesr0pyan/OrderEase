@@ -32,9 +32,10 @@ public class SplashActivity extends AppCompatActivity {
             if (mAuth.getCurrentUser() == null) {
                 Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
                 startActivity(intent);
-            } else {
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
             finish();
         }, 2000);

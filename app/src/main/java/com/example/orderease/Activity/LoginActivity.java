@@ -13,6 +13,8 @@ import com.example.orderease.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import android.widget.TextView;
 
 public class LoginActivity extends BaseActivity {
@@ -22,30 +24,23 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mAuth= FirebaseAuth.getInstance();
         setVariable();
 
 
 
 
-        setContentView(R.layout.activity_login);
 
         TextView textView = findViewById(R.id.textView7);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-                startActivity(intent);
-            }
+        textView.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(intent);
         });
 
         TextView textView2 = findViewById(R.id.textView8);
-        textView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(LoginActivity.this, SignupActivity.class);
-                startActivity(intent2);
-            }
+        textView2.setOnClickListener(v -> {
+            Intent intent2 = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(intent2);
         });
 
 
@@ -59,9 +54,9 @@ public class LoginActivity extends BaseActivity {
         binding.loginBtn.setOnClickListener(v -> {
             String email=binding.userEdt.getText().toString();
             String password =binding.passEdt.getText().toString();
-            if (email.isEmpty() && !password.isEmpty()){
+            if (!email.isEmpty() && !password.isEmpty()){
                 mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(LoginActivity.this, task -> {
-                    if (task.isSuccessful()){
+                    if (task.isComplete()){
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else {
                         Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();

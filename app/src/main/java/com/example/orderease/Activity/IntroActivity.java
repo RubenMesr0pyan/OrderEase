@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.orderease.R;
 import com.example.orderease.databinding.ActivityIntroBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class IntroActivity extends BaseActivity {
     ActivityIntroBinding binding;
@@ -18,7 +19,7 @@ public class IntroActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityIntroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mAuth= FirebaseAuth.getInstance();
         setVariable();
         getWindow().setStatusBarColor(Color.parseColor("#FFE4B5"));
     }

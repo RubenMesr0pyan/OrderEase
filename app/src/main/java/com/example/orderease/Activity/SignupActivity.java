@@ -14,6 +14,8 @@ import com.example.orderease.databinding.ActivitySignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import android.widget.TextView;
 public class SignupActivity extends BaseActivity {
     ActivitySignupBinding binding;
@@ -23,24 +25,17 @@ public class SignupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding=ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mAuth= FirebaseAuth.getInstance();
         setVariable();
 
 
-        setContentView(R.layout.activity_signup);
+
 
         TextView textView5 = findViewById(R.id.textView5);
-        textView5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        textView5.setOnClickListener(v -> {
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
-
-
-
-
 
     }
 
@@ -49,12 +44,12 @@ public class SignupActivity extends BaseActivity {
             String email=binding.userEdt.getText().toString();
             String password = binding.passEdt.getText().toString();
 
-            if (password.length()<6){
+            if (password.length() < 6){
                 Toast.makeText(SignupActivity.this,"your password must be 6 character",Toast.LENGTH_LONG).show();
                 return;
             }
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this, task -> {
-                if (task.isSuccessful()){
+                if (task.isComplete()){
                     Log.i(TAG,"onComplete: ");
                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                 }else {
