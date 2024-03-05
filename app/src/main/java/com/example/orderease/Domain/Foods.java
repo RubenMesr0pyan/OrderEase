@@ -7,7 +7,7 @@ public class Foods {
     private int Id ;
     private int LocationId;
     private double Price;
-    private String imagePath;
+    private String ImagePath;
     private int PriceId;
     private double Star;
     private int TimeId;
@@ -72,11 +72,11 @@ public class Foods {
     }
 
     public String getImagePath() {
-        return imagePath;
+        return ImagePath;
     }
 
     public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+        this.ImagePath = imagePath;
     }
 
     public int getPriceId() {
