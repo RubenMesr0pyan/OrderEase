@@ -28,6 +28,7 @@ public class IntroActivity extends BaseActivity {
         binding.loginBtn.setOnClickListener(v -> {
 if (mAuth.getCurrentUser()!=null){
 startActivity(new Intent(IntroActivity.this, MainActivity.class));
+
 }else {
 startActivity(new Intent(IntroActivity.this, LoginActivity.class));
 

@@ -25,6 +25,9 @@ public class LoginActivity extends BaseActivity {
         binding=ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth= FirebaseAuth.getInstance();
+
+
+
         setVariable();
 
 

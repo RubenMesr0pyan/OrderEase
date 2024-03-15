@@ -21,6 +21,7 @@ import com.example.orderease.Domain.Time;
 import com.example.orderease.R;
 import com.example.orderease.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         binding=ActivityMainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
