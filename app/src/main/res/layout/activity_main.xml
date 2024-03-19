@@ -221,7 +221,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/viewAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/red"
@@ -241,7 +241,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/bestFoodView"
@@ -250,6 +252,7 @@
                     android:clipToPadding="false"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

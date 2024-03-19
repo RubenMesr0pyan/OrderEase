@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "802025821946",
+    "firebase_url": "https://orderease-foodapp-default-rtdb.firebaseio.com",
     "project_id": "orderease-foodapp",
     "storage_bucket": "orderease-foodapp.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.orderease"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "802025821946-tg0716i91774crvopuaq9etft15gfqbj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.orderease",
+            "certificate_hash": "fc0a0cffe88cefc6d623cf6699edc05a69f1269e"
+          }
+        },
+        {
+          "client_id": "802025821946-l5djk7t1290np4pkg9uk2o1btr3qab59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD67SXe1Z0QcjK-JYbIqrD8ziOXmHzXnrQ"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802025821946-l5djk7t1290np4pkg9uk2o1btr3qab59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

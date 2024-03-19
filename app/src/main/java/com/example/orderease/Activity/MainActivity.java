@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.example.orderease.Adapter.BestFoodsAdapter;
 import com.example.orderease.Adapter.CategoryAdapter;
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
+    private TextView viewAll;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,10 @@ public class MainActivity extends BaseActivity {
 
 
 
-
         binding=ActivityMainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
+
 
 
         initLocation();
