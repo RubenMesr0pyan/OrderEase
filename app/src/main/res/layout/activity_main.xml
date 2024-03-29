@@ -63,14 +63,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/likedBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:id="@+id/AddItemBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginEnd="6dp"
+                    android:layout_gravity="center_horizontal"
                     android:background="@drawable/grey_background"
-                    android:padding="12dp"
-
-                    app:srcCompat="@drawable/settings" />
+                    app:srcCompat="@drawable/red_plus_icon_2" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -109,7 +108,7 @@
                 <ImageView
                     android:id="@+id/cartBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="6dp"
                     android:background="@drawable/grey_background"
                     android:padding="12dp"
@@ -202,31 +201,33 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
                     android:text="Today's best Foods"
                     android:textColor="@color/blue_gray"
                     android:textSize="22dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/viewAll"
+                <ImageView
+                    android:id="@+id/likedBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red"
-                    android:text="VIEW ALL" />
-            </LinearLayout>
+                    android:layout_alignParentEnd="true"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/favorite_red" />
+
+            </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

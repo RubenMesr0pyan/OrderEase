@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.orderease.Adapter.BestFoodsAdapter;
@@ -30,6 +31,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
@@ -40,12 +42,25 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         binding=ActivityMainBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
 
+        ImageView likedBtn = findViewById(R.id.likedBtn);
+        ImageView addItemBtn = findViewById(R.id.AddItemBtn);
+        addItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PassActivity.class));
+            }
+        });
+
+        likedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FavoriteActivity.class));
+
+            }
+        });
 
 
         initLocation();
@@ -70,6 +85,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
     }
 
     private void initBestFood() {

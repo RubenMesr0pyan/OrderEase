@@ -54,7 +54,6 @@ public class SignupActivity extends BaseActivity {
                     Log.i(TAG, "onComplete: ");
                     FirebaseUser user = mAuth.getCurrentUser();
                     sendVerificationEmail(user);
-                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                 } else {
                     Log.i(TAG, "failure: " + task.getException());
                     Toast.makeText(SignupActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
@@ -71,6 +70,7 @@ public class SignupActivity extends BaseActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "We send verification email", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(this, "Failed to send verification email. Please try again later.", Toast.LENGTH_SHORT).show();
                     }
