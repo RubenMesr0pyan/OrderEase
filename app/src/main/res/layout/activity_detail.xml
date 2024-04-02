@@ -35,11 +35,13 @@
                     android:id="@+id/favBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/favorite_white"
                     app:layout_constraintBottom_toBottomOf="@+id/pic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pic"
-                    app:srcCompat="@drawable/favorite_white" />
+                    tools:ignore="ContentDescription" />
+
 
                 <ImageView
                     android:id="@+id/backBtn"

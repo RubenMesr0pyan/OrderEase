@@ -47,25 +47,12 @@ public class MainActivity extends BaseActivity {
 
         ImageView likedBtn = findViewById(R.id.likedBtn);
         ImageView addItemBtn = findViewById(R.id.AddItemBtn);
-        addItemBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PassActivity.class));
-            }
-        });
+        addItemBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddItemsActivity.class)));
 
-        likedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FavoriteActivity.class));
-
-            }
-        });
+        likedBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FavoriteActivity.class)));
 
 
-        initLocation();
-        initTime();
-        initPrice();
+
         initBestFood();
         initCategory();
         setVaribale();
@@ -144,71 +131,5 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void initLocation() {
-        DatabaseReference myRef=database.getReference("Location");
-        ArrayList<Location >list=new ArrayList<>();
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot issue:snapshot.getChildren()){
-                        list.add(issue.getValue(Location.class));
-                    }
-                    ArrayAdapter<Location> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.locationSp.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-    private void initTime() {
-        DatabaseReference myRef=database.getReference("Time");
-        ArrayList<Time>list=new ArrayList<>();
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot issue:snapshot.getChildren()){
-                        list.add(issue.getValue(Time.class));
-                    }
-                    ArrayAdapter<Time> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.timeSp.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-    private void initPrice() {
-        DatabaseReference myRef=database.getReference("Price");
-        ArrayList<Price>list=new ArrayList<>();
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot issue:snapshot.getChildren()){
-                        list.add(issue.getValue(Price.class));
-                    }
-                    ArrayAdapter<Price> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.priceSp.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 }

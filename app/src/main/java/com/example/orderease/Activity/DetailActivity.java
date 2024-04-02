@@ -4,18 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.orderease.Domain.Favorite;
 import com.example.orderease.Domain.Foods;
 import com.example.orderease.Helper.ManagmentCart;
 import com.example.orderease.R;
 import com.example.orderease.databinding.ActivityDetailBinding;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DetailActivity extends BaseActivity {
-    ActivityDetailBinding binding;
+    com.example.orderease.databinding.ActivityDetailBinding binding;
+    FirebaseAuth mAuth;
+
     private Foods object;
     private int num = 1 ;
     private ManagmentCart managmentCart;
+    boolean isFavorite = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +38,13 @@ public class DetailActivity extends BaseActivity {
 
         getIntentExtra();
         setVariable();
+        checkIfFavorite();
+
     }
 
     private void setVariable() {
         managmentCart= new ManagmentCart(this);
+        mAuth = FirebaseAuth.getInstance();
 
         binding.backBtn.setOnClickListener(v -> finish());
         Glide.with(DetailActivity.this)
@@ -62,12 +77,85 @@ public class DetailActivity extends BaseActivity {
 
         });
         binding.favBtn.setOnClickListener(v -> {
-            if (v.isSelected()) {
-                v.setBackgroundResource(R.drawable.custom_button_normal);
+            if (isFavorite) {
+                binding.favBtn.setImageDrawable(getDrawable(R.drawable.favorite1));
+                Toast.makeText(DetailActivity.this, "Removed from Favorites", Toast.LENGTH_SHORT).show();
+                removeFromFavorite();
             } else {
-                v.setBackgroundResource(R.drawable.custom_button_pressed);
+                binding.favBtn.setImageDrawable(getDrawable(R.drawable.favorite2));
+                Toast.makeText(DetailActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
+                addToFavorite();
             }
-            v.setSelected(!v.isSelected());
+        });
+    }
+
+
+
+    void addToFavorite() {
+        String currentId = mAuth.getCurrentUser().getUid();
+        Favorite favorite = new Favorite(currentId, object);
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference favoritesRef = rootRef.child("Favorites");
+
+        String favoriteKey = favoritesRef.push().getKey();
+
+
+        favoritesRef.child(favoriteKey).setValue(favorite);
+        isFavorite = true;
+    }
+
+
+    private void removeFromFavorite() {
+        String currentId = mAuth.getCurrentUser().getUid();
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference().child("Favorites");
+
+        favoritesRef.orderByChild("ownerId").equalTo(currentId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Favorite favorite = snapshot.getValue(Favorite.class);
+                    if (favorite != null && favorite.getFood().getId() == object.getId()) {
+                        snapshot.getRef().removeValue();
+                        Toast.makeText(DetailActivity.this, "Removed from Favorites", Toast.LENGTH_SHORT).show();
+                        isFavorite = false;
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+    }
+
+    private void checkIfFavorite() {
+        String currentId = mAuth.getCurrentUser().getUid();
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference().child("Favorites");
+
+        favoritesRef
+                .orderByChild("ownerId")
+                .equalTo(currentId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Favorite favorite = snapshot.getValue(Favorite.class);
+                    if (favorite != null && favorite.getFood().getId() == object.getId()) {
+                        isFavorite = true;
+                        binding.favBtn.setImageDrawable(getDrawable(R.drawable.favorite2));
+                        return;
+                    }
+                }
+                isFavorite = false;
+                binding.favBtn.setImageDrawable(getDrawable(R.drawable.favorite1));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
     }
 

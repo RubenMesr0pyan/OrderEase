@@ -17,7 +17,6 @@ public class CartActivity extends BaseActivity {
     private ActivityCartBinding binding;
     private RecyclerView.Adapter adapter;
     private ManagmentCart managmentCart;
-    private double tax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +44,18 @@ public class CartActivity extends BaseActivity {
         binding.cardView.setLayoutManager(linearLayoutManager);
         adapter = new CartAdapter(managmentCart.getListCart(), this, () -> calculateCart());
         binding.cardView.setAdapter(adapter);
+
     }
 
     private void calculateCart() {
-        double percentTax=0.02;// amen patveric 2% tax
-        double delivery = 10;// 10 dollar araqman hamar
 
-        tax=Math.round(managmentCart.getTotalFee()*percentTax*100.0)/100;
-        double total = Math.round((managmentCart.getTotalFee() + tax + delivery ) * 100)/100;
+        double delivery = 10;
+
+        double total = Math.round((managmentCart.getTotalFee()  + delivery ) * 100)/100;
         double itemTotal = Math.round(managmentCart.getTotalFee()*100)/100;
 
         binding.totalFeeTxt.setText("$" + itemTotal);
-        binding.taxTxt.setText("$" + tax);
+
         binding.deliveryTxt.setText("$" + delivery);
         binding.totalTxt.setText("$" + total);
     }
