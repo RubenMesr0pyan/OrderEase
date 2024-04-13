@@ -81,6 +81,21 @@
                 android:textColorHint="@color/blue_gray"
                 android:textSize="16dp" />
 
+            <EditText
+                android:id="@+id/passRepeatEdit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/edittext_background"
+                android:ems="10"
+                android:hint="Repeat password"
+                android:inputType="textPassword"
+                android:textAlignment="center"
+                android:textColorHint="@color/blue_gray"
+                android:textSize="16dp" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/signupBtn"
                 style="@android:style/Widget.Button"

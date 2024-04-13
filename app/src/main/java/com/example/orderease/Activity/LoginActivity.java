@@ -140,8 +140,7 @@ public class LoginActivity extends BaseActivity {
 
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-//                            String userName = user.getDisplayName();
-//                            String email = user.getEmail();
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
 

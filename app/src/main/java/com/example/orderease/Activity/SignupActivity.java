@@ -43,36 +43,40 @@ public class SignupActivity extends BaseActivity {
         binding.signupBtn.setOnClickListener(v -> {
             String email = binding.userEdit.getText().toString();
             String password = binding.passEdit.getText().toString();
+            String repeat = binding.passRepeatEdit.getText().toString();
 
             if (password.length() < 6) {
-                Toast.makeText(SignupActivity.this, "Your password must be 6 character", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignupActivity.this, "Your password must be 6 characters", Toast.LENGTH_LONG).show();
                 return;
             }
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignupActivity.this, task -> {
-                if (task.isComplete()) {
+            if (!repeat.equals(password)) {
+                Toast.makeText(SignupActivity.this, "Passwords do not match", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-                    Log.i(TAG, "onComplete: ");
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignupActivity.this, task -> {
+                if (task.isSuccessful()) {
+                    Log.i(TAG, "onComplete: Registration successful");
                     FirebaseUser user = mAuth.getCurrentUser();
                     sendVerificationEmail(user);
                 } else {
-                    Log.i(TAG, "failure: " + task.getException());
+                    Log.i(TAG, "onComplete: Registration failed", task.getException());
                     Toast.makeText(SignupActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
-
                 }
-
             });
         });
     }
+
 
 
     private void sendVerificationEmail(FirebaseUser user) {
         user.sendEmailVerification()
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "We send verification email", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "We send verification email. Please verify your email and then log in. ", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                     } else {
-                        Toast.makeText(this, "Failed to send verification email. Please try again later.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Failed to send verification email. Please check your internet connection and try again.", Toast.LENGTH_LONG).show();
                     }
                 });
     }

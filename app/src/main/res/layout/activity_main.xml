@@ -29,19 +29,10 @@
                     android:layout_height="wrap_content"
                     android:text="Welcome"
                     android:textSize="25sp"
-                    android:layout_marginLeft="15sp"
+                    android:layout_marginLeft="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/textView10"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Ruben Mesropyan"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
 
                 <ImageView
                     android:id="@+id/logoutBtn"
@@ -57,19 +48,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="15dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/AddItemBtn"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="6dp"
+                    android:id="@+id/likedBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/grey_background"
-                    app:srcCompat="@drawable/red_plus_icon_2" />
+                    app:srcCompat="@drawable/favorite_red" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -108,7 +99,7 @@
                 <ImageView
                     android:id="@+id/cartBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:layout_marginStart="6dp"
                     android:background="@drawable/grey_background"
                     android:padding="12dp"
@@ -201,33 +192,19 @@
 <!--                </LinearLayout>-->
 <!--            </LinearLayout>-->
 
-            <RelativeLayout
+            <TextView
+                android:text="Today's best Foods"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="20dp"
-                    android:text="Today's best Foods"
-                    android:textColor="@color/blue_gray"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/likedBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/favorite_red" />
-
-            </RelativeLayout>
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/blue_gray"
+                android:textSize="22dp"
+                android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -262,11 +239,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:text="Choose Category"
+
+
                 android:layout_marginStart="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Choose Category"
+
                 android:layout_marginTop="16dp"
                 android:textColor="@color/blue_gray"
                 android:textSize="22dp"

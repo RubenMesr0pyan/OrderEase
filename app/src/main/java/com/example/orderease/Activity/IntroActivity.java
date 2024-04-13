@@ -27,23 +27,23 @@ public class IntroActivity extends BaseActivity {
         getWindow().setStatusBarColor(Color.parseColor("#FFE4B5"));
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-//        if (user != null) {
-//            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-//            startActivity(intent);
-//        }
+
     }
 
     private void setVariable() {
         binding.loginBtn.setOnClickListener(v -> {
-if (mAuth.getCurrentUser()!=null){
-startActivity(new Intent(IntroActivity.this, MainActivity.class));
+            if (mAuth.getCurrentUser()!=null){
 
-}else {
-startActivity(new Intent(IntroActivity.this, LoginActivity.class));
+            startActivity(new Intent(IntroActivity.this, MainActivity.class));
+
+            }else {
+
+            startActivity(new Intent(IntroActivity.this, LoginActivity.class));
 
 }
         });
 
         binding.signupBtn.setOnClickListener(v -> startActivity(new Intent(IntroActivity.this, SignupActivity.class)));
+
     }
 }

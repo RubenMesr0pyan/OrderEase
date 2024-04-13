@@ -1,7 +1,6 @@
 package com.example.orderease.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,13 +15,9 @@ import com.example.orderease.Adapter.BestFoodsAdapter;
 import com.example.orderease.Adapter.CategoryAdapter;
 import com.example.orderease.Domain.Category;
 import com.example.orderease.Domain.Foods;
-import com.example.orderease.Domain.Location;
-import com.example.orderease.Domain.Price;
-import com.example.orderease.Domain.Time;
 import com.example.orderease.R;
 import com.example.orderease.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +25,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
@@ -46,8 +39,8 @@ public class MainActivity extends BaseActivity {
         setContentView(binding.getRoot());
 
         ImageView likedBtn = findViewById(R.id.likedBtn);
-        ImageView addItemBtn = findViewById(R.id.AddItemBtn);
-        addItemBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddItemsActivity.class)));
+//        ImageView addItemBtn = findViewById(R.id.AddItemBtn);
+//        addItemBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddItemsActivity.class)));
 
         likedBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FavoriteActivity.class)));
 
