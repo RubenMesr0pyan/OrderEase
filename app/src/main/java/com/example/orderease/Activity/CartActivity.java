@@ -48,17 +48,23 @@ public class CartActivity extends BaseActivity {
     }
 
     private void calculateCart() {
-
         double delivery = 10;
-
         double total = Math.round((managmentCart.getTotalFee()  + delivery ) * 100)/100;
         double itemTotal = Math.round(managmentCart.getTotalFee()*100)/100;
 
-        binding.totalFeeTxt.setText("$" + itemTotal);
+        if (managmentCart.getListCart().isEmpty()) {
+            binding.emptyTxt.setVisibility(View.VISIBLE);
+            binding.scrollviewCart.setVisibility(View.GONE);
+        } else {
+            binding.emptyTxt.setVisibility(View.GONE);
+            binding.scrollviewCart.setVisibility(View.VISIBLE);
+        }
 
+        binding.totalFeeTxt.setText("$" + itemTotal);
         binding.deliveryTxt.setText("$" + delivery);
         binding.totalTxt.setText("$" + total);
     }
+
 
     private void setVariable() {
         binding.backBtn.setOnClickListener(v -> finish());

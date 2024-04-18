@@ -60,7 +60,19 @@
                     android:layout_marginEnd="5dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/grey_background"
-                    app:srcCompat="@drawable/favorite_red" />
+                    app:srcCompat="@drawable/favorite_red"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/addItemBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/grey_background"
+                    app:srcCompat="@drawable/red_plus_icon_2"
+                    android:visibility="gone" />
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"

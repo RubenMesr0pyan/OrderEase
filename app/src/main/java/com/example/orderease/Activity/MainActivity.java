@@ -1,5 +1,9 @@
 package com.example.orderease.Activity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,21 +39,35 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        ImageView addItemBtn = findViewById(R.id.addItemBtn);
         ImageView likedBtn = findViewById(R.id.likedBtn);
-//        ImageView addItemBtn = findViewById(R.id.AddItemBtn);
-//        addItemBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddItemsActivity.class)));
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String email = user.getEmail();
+            if (email != null && email.equals("rubenmesropyan307@gmail.com")) {
+                addItemBtn.setVisibility(View.VISIBLE);
+                likedBtn.setVisibility(View.GONE);
+                addItemBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddItemsActivity.class)));
+            } else {
+                addItemBtn.setVisibility(View.GONE);
+                likedBtn.setVisibility(View.VISIBLE);
+            }
+        } else {
+            addItemBtn.setVisibility(View.GONE);
+            likedBtn.setVisibility(View.VISIBLE);
+        }
 
         likedBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FavoriteActivity.class)));
-
-
 
         initBestFood();
         initCategory();
         setVaribale();
     }
+
 
     private void setVaribale() {
         binding.logoutBtn.setOnClickListener(v -> {
