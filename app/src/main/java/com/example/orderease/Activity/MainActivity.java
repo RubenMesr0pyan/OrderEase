@@ -29,6 +29,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
@@ -90,29 +91,35 @@ public class MainActivity extends BaseActivity {
         DatabaseReference myRef = database.getReference("Foods");
         binding.progressBarBestFood.setVisibility(View.VISIBLE);
         ArrayList<Foods> list = new ArrayList<>();
-        Query query = myRef.orderByChild("BestFood").equalTo(true);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot issue:snapshot.getChildren()){
-                        list.add(issue.getValue(Foods.class));
-                    }
-                    if (list.size()>0) {
-                        binding.bestFoodView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
-                        RecyclerView.Adapter adapter=new BestFoodsAdapter(list);
-                        binding.bestFoodView.setAdapter(adapter);
-                    }
-                    binding.progressBarBestFood.setVisibility(View.GONE);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        String searchText = binding.searchEdt.getText().toString().trim().toLowerCase();
 
-            }
-        });
+        myRef.orderByChild("BestFood").equalTo(true)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                Foods food = dataSnapshot.getValue(Foods.class);
+                                if (food != null && food.getTitle().toLowerCase().contains(searchText)) {
+                                    list.add(food);
+                                }
+                            }
+                            if (!list.isEmpty()) {
+                                binding.bestFoodView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
+                                RecyclerView.Adapter adapter=new BestFoodsAdapter(list);
+                                binding.bestFoodView.setAdapter(adapter);
+                            }
+                        }
+                        binding.progressBarBestFood.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
     }
+
 
     private void initCategory() {
         DatabaseReference myRef = database.getReference("Category");
