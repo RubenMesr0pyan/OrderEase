@@ -49,35 +49,68 @@ public class ListFoodActivity extends BaseActivity {
 
         Query query;
 
-        if (isSearch){
-            query= myRef.orderByChild("Title").startAt(searchText).endAt(searchText + '\uf8ff');
-        }else {
+        if (isSearch) {
+            searchFoods(searchText);
+        } else {
             query = myRef.orderByChild("CategoryId").equalTo(categoryId);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot issue : snapshot.getChildren()) {
+                            list.add(issue.getValue(Foods.class));
+                        }
+                        if (!list.isEmpty()) {
+                            binding.foodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this, 2));
+                            adapterListFood = new FoodListAdapter(list);
+                            binding.foodListView.setAdapter(adapterListFood);
+
+
+                        }
+                        binding.progressBar.setVisibility(View.GONE);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
         }
+    }
+
+    private void displaySearchResults(ArrayList<Foods> searchResults) {
+        adapterListFood = new FoodListAdapter(searchResults);
+        binding.foodListView.setAdapter(adapterListFood);
+    }
 
 
+    private void searchFoods(String query) {
+        DatabaseReference myRef = database.getReference("Foods");
 
+        Query searchQuery = myRef.orderByChild("Title").startAt(query).endAt(query + "\uf8ff");
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        searchQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot issue :snapshot.getChildren()){
-                        list.add(issue.getValue(Foods.class));
+                if (snapshot.exists()) {
+                    ArrayList<Foods> searchResults = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        searchResults.add(dataSnapshot.getValue(Foods.class));
                     }
-                    if (list.size()>0){
-                        binding.foodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this,2));
-                        adapterListFood = new FoodListAdapter(list);
+                    // Обновляем RecyclerView с результатами поиска
+                    if (!searchResults.isEmpty()) {
+                        binding.foodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this, 2));
+                        adapterListFood = new FoodListAdapter(searchResults);
                         binding.foodListView.setAdapter(adapterListFood);
-
                     }
-                    binding.progressBar.setVisibility(View.GONE);
                 }
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
