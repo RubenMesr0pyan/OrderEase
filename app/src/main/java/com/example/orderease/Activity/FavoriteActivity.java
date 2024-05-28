@@ -58,18 +58,23 @@ public class FavoriteActivity extends BaseActivity {
                     }
                 }
 
-                if (foods.size() > 0){
+                if (foods.size() > 0) {
+
                     binding.favoriteRecycler.setVisibility(View.VISIBLE);
                     binding.emptyTxt2.setVisibility(View.GONE);
-                    binding.favoriteRecycler.setLayoutManager(new GridLayoutManager(FavoriteActivity.this,2));
+                    binding.emptyFavoritesImage.setVisibility(View.GONE);
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.favoriteRecycler.setLayoutManager(new GridLayoutManager(FavoriteActivity.this, 2));
                     adapterListFood = new FoodListAdapter(foods);
                     binding.favoriteRecycler.setAdapter(adapterListFood);
-                    binding.progressBar.setVisibility(View.GONE);
                 } else {
+
                     binding.favoriteRecycler.setVisibility(View.GONE);
                     binding.emptyTxt2.setVisibility(View.VISIBLE);
+                    binding.emptyFavoritesImage.setVisibility(View.VISIBLE);
                     binding.progressBar.setVisibility(View.GONE);
                 }
+
                 binding.refreshView.setRefreshing(false);
             }
             @Override

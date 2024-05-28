@@ -20,10 +20,6 @@ public class Foods implements Serializable {
     public Foods() {
     }
 
-    @Override
-    public String toString() {
-        return  Title;
-    }
 
     public int getCategoryId() {
         return CategoryId;
@@ -37,88 +33,88 @@ public class Foods implements Serializable {
         return Description;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     public boolean isBestFood() {
         return BestFood;
     }
 
-    public void setBestFood(boolean bestFood) {
-        BestFood = bestFood;
+    public void setBestFood(boolean BestFood) {
+        this.BestFood = BestFood;
     }
 
     public int getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public int getLocationId() {
         return LocationId;
     }
 
-    public void setLocationId(int locationId) {
-        LocationId = locationId;
+    public void setLocationId(int LocationId) {
+        this.LocationId = LocationId;
     }
 
     public double getPrice() {
         return Price;
     }
 
-    public void setPrice(double price) {
-        Price = price;
+    public void setPrice(double Price) {
+        this.Price = Price;
     }
 
     public String getImagePath() {
         return ImagePath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.ImagePath = imagePath;
+    public void setImagePath(String ImagePath) {
+        this.ImagePath = ImagePath;
     }
 
     public int getPriceId() {
         return PriceId;
     }
 
-    public void setPriceId(int priceId) {
-        PriceId = priceId;
+    public void setPriceId(int PriceId) {
+        this.PriceId = PriceId;
     }
 
     public double getStar() {
         return Star;
     }
 
-    public void setStar(double star) {
-        Star = star;
+    public void setStar(double Star) {
+        this.Star = Star;
     }
 
     public int getTimeId() {
         return TimeId;
     }
 
-    public void setTimeId(int timeId) {
-        TimeId = timeId;
+    public void setTimeId(int TimeId) {
+        this.TimeId = TimeId;
     }
 
     public int getTimeValue() {
         return TimeValue;
     }
 
-    public void setTimeValue(int timeValue) {
-        TimeValue = timeValue;
+    public void setTimeValue(int TimeValue) {
+        this.TimeValue = TimeValue;
     }
 
     public String getTitle() {
         return Title;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public void setTitle(String Title) {
+        this.Title = Title;
     }
 
     public int getNumberInCart() {

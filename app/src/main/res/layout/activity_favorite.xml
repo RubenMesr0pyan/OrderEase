@@ -7,18 +7,34 @@
     tools:context=".Activity.FavoriteActivity">
 
 
+    <ImageView
+        android:id="@+id/emptyFavoritesImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/empty_favorites_image"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+
     <TextView
         android:id="@+id/emptyTxt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Favorites is empty"
         android:textColor="@color/red"
-        android:textSize="25dp"
+        android:textSize="35dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emptyFavoritesImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp"
+    app:layout_constraintVertical_bias="0.1" />
+
 
     <LinearLayout
         android:id="@+id/linearLayoutParent"

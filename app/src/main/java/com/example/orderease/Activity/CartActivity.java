@@ -36,17 +36,19 @@ public class CartActivity extends BaseActivity {
         if (managmentCart.getListCart().isEmpty()){
             binding.emptyTxt.setVisibility(View.VISIBLE);
             binding.scrollviewCart.setVisibility(View.GONE);
-        }else{
+            binding.emptyCartImage.setVisibility(View.VISIBLE);
+        } else {
             binding.emptyTxt.setVisibility(View.GONE);
             binding.scrollviewCart.setVisibility(View.VISIBLE);
+            binding.emptyCartImage.setVisibility(View.GONE);
         }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         binding.cardView.setLayoutManager(linearLayoutManager);
         adapter = new CartAdapter(managmentCart.getListCart(), this, () -> calculateCart());
         binding.cardView.setAdapter(adapter);
-
     }
+
 
     private void calculateCart() {
         double delivery = 10;
@@ -56,9 +58,13 @@ public class CartActivity extends BaseActivity {
         if (managmentCart.getListCart().isEmpty()) {
             binding.emptyTxt.setVisibility(View.VISIBLE);
             binding.scrollviewCart.setVisibility(View.GONE);
+            binding.emptyCartImage.setVisibility(View.VISIBLE);
+
         } else {
             binding.emptyTxt.setVisibility(View.GONE);
             binding.scrollviewCart.setVisibility(View.VISIBLE);
+            binding.emptyCartImage.setVisibility(View.GONE);
+
         }
 
         binding.totalFeeTxt.setText("$" + itemTotal);

@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String email = user.getEmail();
-            if (email != null && email.equals("rubenmesropyan307@gmail.com")) {
+            if (email != null && (email.equals("rubenmesropyan307@gmail.com") || email.equals("sictst1@gmail.com"))) {
                 addItemBtn.setVisibility(View.VISIBLE);
                 likedBtn.setVisibility(View.GONE);
                 addItemBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddItemsActivity.class)));
@@ -197,15 +197,13 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
-
-
     private void initBestFood() {
         DatabaseReference myRef = database.getReference("Foods");
         binding.progressBarBestFood.setVisibility(View.VISIBLE);
         ArrayList<Foods> list = new ArrayList<>();
 
         String searchText = binding.searchEdt.getText().toString().trim().toLowerCase();
+
 
         myRef.orderByChild("BestFood").equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {

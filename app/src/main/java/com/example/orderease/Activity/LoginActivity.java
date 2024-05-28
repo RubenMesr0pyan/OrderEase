@@ -43,6 +43,9 @@ public class LoginActivity extends BaseActivity {
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
         google = findViewById(R.id.google);
+        findViewById(R.id.guestModeBtn).setOnClickListener(v -> signInAsGuest());
+        findViewById(R.id.adminModeBtn).setOnClickListener(v -> signInAsAdmin());
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -83,6 +86,33 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
+
+    private void signInAsGuest() {
+        String email = "sictst4@gmail.com";
+        String password = "Samsung2023";
+
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            } else {
+                Toast.makeText(this, "Failed to sign in as guest", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void signInAsAdmin() {
+        String email = "sictst1@gmail.com";
+        String password = "Samsung2023";
+
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            } else {
+                Toast.makeText(this, "Failed to sign in as admin", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void setVariable() {
         binding.loginBtn.setOnClickListener(v -> {

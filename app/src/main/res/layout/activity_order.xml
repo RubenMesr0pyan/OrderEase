@@ -33,7 +33,7 @@
                 android:ems="10"
                 android:inputType="none"
                 android:enabled="false"
-                android:text="Contact Information "
+                android:text="Contact Information"
                 android:textAlignment="center"
                 android:textColor="@color/blue_gray"
                 android:textSize="25dp"
@@ -151,15 +151,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <com.example.orderease.Helper.MapFrameLayout
+                android:id="@+id/map_container"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView24" />
+                app:layout_constraintTop_toBottomOf="@id/textView24">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.example.orderease.Helper.MapFrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -168,7 +175,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/map">
+                app:layout_constraintTop_toBottomOf="@id/map_container">
 
                 <EditText
                     android:id="@+id/addresfrommap"
@@ -176,6 +183,7 @@
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:padding="15dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_background"

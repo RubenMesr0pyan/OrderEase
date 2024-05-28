@@ -85,7 +85,17 @@ public class OrderActivity extends BaseActivity implements OnMapReadyCallback, G
                 marker.setTitle(markerTitle);
                 marker.showInfoWindow();
 
-                addressEditText.setText(latLng.latitude + ", " + latLng.longitude);
+                Geocoder geocoder = new Geocoder(OrderActivity.this, Locale.getDefault());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    if (!addresses.isEmpty()) {
+                        Address address = addresses.get(0);
+                        String addressLine = address.getAddressLine(0);
+                        addressEditText.setText(addressLine);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -110,7 +120,18 @@ public class OrderActivity extends BaseActivity implements OnMapReadyCallback, G
         marker.setPosition(newPosition);
         marker.setTitle(markerTitle);
         marker.showInfoWindow();
-        addressEditText.setText(newPosition.latitude + ", " + newPosition.longitude);
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(newPosition.latitude, newPosition.longitude, 1);
+            if (!addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                String addressLine = address.getAddressLine(0);
+                addressEditText.setText(addressLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -134,8 +155,6 @@ public class OrderActivity extends BaseActivity implements OnMapReadyCallback, G
         }
 
     }
-
-
 
 
 }
